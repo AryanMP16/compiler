@@ -1,7 +1,7 @@
-#include "parser.h"
+#include "lexer.h"
 #include "stdio.h"
 
 int main(int argc, char* argv[]){
-  test();
+  tokenize("filename.c");
   return 0;
 }

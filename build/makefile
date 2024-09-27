@@ -5,10 +5,10 @@ CFLAGS = -I$(IDIR)
 ODIR = obj
 SDIR = ../src
 
-_DEPS = parser.h
+_DEPS = lexer.o
 DEPS = $(patsubst %, $(IDIR)/%, $(_DEPS))
 
-_OBJ = main.o parser.o
+_OBJ = main.o lexer.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
