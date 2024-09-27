@@ -3,12 +3,12 @@ CC = gcc
 CFLAGS = -I$(IDIR)
 
 ODIR = obj
-SDIR = ../tester
+SDIR = ../src
 
-_DEPS = h.h
+_DEPS = parser.h
 DEPS = $(patsubst %, $(IDIR)/%, $(_DEPS))
 
-_OBJ = main.o
+_OBJ = main.o parser.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
 $(ODIR)/%.o: $(SDIR)/%.c $(DEPS)
