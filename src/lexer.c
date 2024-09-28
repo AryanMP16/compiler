@@ -9,6 +9,9 @@ struct token* tokenize(char filename[]){
   strcpy(test->token_str, "hello");
   //the above is just there so C doesn't yell at me for not returning a token*
 
+  FILE* file = fopen(filename, "r");
+  char buffer[100];
+  fread(buffer, sizeof(char), 5, file);
   
   return test;
 }
