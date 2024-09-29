@@ -1,6 +1,6 @@
 IDIR = ../src
 CC = gcc
-CFLAGS = -I$(IDIR) -ggdb
+CFLAGS = -I$(IDIR) -g
 
 ODIR = obj
 SDIR = ../src
