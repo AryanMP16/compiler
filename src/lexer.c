@@ -46,6 +46,7 @@ struct token* tokenize(char filename[]){
   //count number of lexemes
   bool wasPrevCharDelim = false;
   size_t r_traverser = 0, l_traverser = 0;
+  
   while (r_traverser < size && l_traverser < size && l_traverser <= r_traverser){
     if (!isDelimeter(buffer[r_traverser])){
       r_traverser++;
@@ -53,14 +54,17 @@ struct token* tokenize(char filename[]){
     }
  
     else if (isDelimeter(buffer[r_traverser]) && l_traverser < r_traverser){
-      if (wasPrevCharDelim == true) {}
-      else if (l_traverser < r_traverser){
-	char* toPrint;
-	strncpy(toPrint, buffer + l_traverser, r_traverser - l_traverser);
-	printf("%s", toPrint);
-      }
-      else if (r_traverser == l_traverser){
-	printf("%c", buffer[r_traverser]);
+      if (!wasPrevCharDelim){
+	if (l_traverser < r_traverser){
+	  char* toPrint = (char*) malloc(r_traverser - l_traverser + 1);
+	  strncpy(toPrint, buffer + l_traverser, r_traverser - l_traverser);
+	  toPrint[r_traverser - l_traverser] = '\0';
+	  printf("%s\n", toPrint);
+	  free(toPrint);
+	}
+	else if (r_traverser == l_traverser){
+	  printf("%c\n", buffer[r_traverser]);
+	}
       }
       
       r_traverser++;
