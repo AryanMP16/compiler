@@ -2,6 +2,9 @@
 #include "stdio.h"
 
 int main(int argc, char* argv[]){
-  tokenize("../src/filename.c");
+  struct token* token_arr = tokenize("../src/filename.c");
+
+  printTokenStream(token_arr);
+  
   return 0;
 }

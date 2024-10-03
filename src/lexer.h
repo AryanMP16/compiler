@@ -12,5 +12,6 @@ struct token* tokenize(char filename[]);
 bool isDelimeter(char c);
 bool isKeyWord(char* str);
 bool isOperator(char c);
+void printTokenStream(struct token* token_arr);
 
 #endif
