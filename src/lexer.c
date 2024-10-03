@@ -66,7 +66,8 @@ struct token* tokenize(char filename[]){
 
   size_t token_counter = 0;
 
-  struct token* token_array = malloc(5000 * sizeof(struct token));
+  size_t capacity = 100;
+  struct token* token_array = malloc(capacity * sizeof(struct token));
   
   while (r_traverser < size && l_traverser < size && l_traverser <= r_traverser){
     if (!isDelimeter(buffer[r_traverser])){
@@ -81,6 +82,11 @@ struct token* tokenize(char filename[]){
 	  strncpy(str, buffer + l_traverser, r_traverser - l_traverser);
 	  str[r_traverser - l_traverser] = '\0';
 
+	  if (token_counter >= capacity){
+	    capacity *= 2;
+	    token_array = realloc(token_array, capacity * sizeof(struct token));
+	  }
+	  
 	  struct token t = {strlen(str), str};
 	  *(token_array + token_counter) = t;
 	  
@@ -91,6 +97,11 @@ struct token* tokenize(char filename[]){
 	  char* str = "X\0";
 	  str[0] = buffer[r_traverser];
 
+	  if (token_counter >= capacity){
+	    capacity *= 2;
+	    token_array = realloc(token_array, capacity * sizeof(struct token));
+	  }
+	  
 	  struct token t = {2, str};
 	  *(token_array + token_counter) = t;
 	  
@@ -112,4 +123,15 @@ struct token* tokenize(char filename[]){
   *(token_array + token_counter) = array_escape;
 
   return token_array;
+}
+
+void freeTokens(struct token* token_arr){
+  if (token_arr == NULL)
+    return;
+
+  size_t i = 0;
+  while (token_arr[i].length != -1){
+    free(token_arr[i].token_str);
+    i++;
+  }
 }
